@@ -20,16 +20,29 @@
         </div>
     </header>
 
+    <form id="title-taker-form" class="container mb-4">
+            <header class="row">
+                <h2 class="col my-3">You can customize a topic to search</h2>
+            </header>
+        <div class="form-group">
+            <label for="topic-input">New Topic Input</label>
+            <input type="text" class="form-control" id="topic-input" aria-describedby="topic-help"
+                placeholder="Enter a topic title">
+            <small id="topic-help" class="form-text text-muted">Enter a new topic title and click "GIPHY-FY" to create an image generator button for it.</small>
+        </div>
+        <button type="topic-submit" class="btn btn-secondary">GIPHY-FY</button>
+    </form>
+
     <section class="container">
         <header class="row">
-            <h2 class="col m-5">Click on a button below to generate images</h2>
+            <h2 class="col my-4 py-1">Click on a button below to generate images</h2>
         </header>
     </section>
 
     <section id="button-stage" class="container">
     </section>
 
-    <section id="gif-showcase" class="container-fluid bg-dark">
+    <section id="gif-showcase" class="container">
     </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

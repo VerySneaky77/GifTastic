@@ -7,12 +7,12 @@ var colCount = colStart;
 
 var $currRow;
 
-var topics = ["Mario", "Donkey Kong",
-    "Luigi", "Samus", "Kirby",
-    "Megaman", "Captain Falcon"
-];
-
 $(document).ready(function (e) {
+    var topics = ["Mario", "Donkey Kong",
+        "Luigi", "Samus", "Kirby",
+        "Megaman", "Captain Falcon"
+    ];
+
     var $buttonStage = $("#button-stage");
     var $gifsStage = $("#gif-showcase");
 
@@ -27,7 +27,6 @@ $(document).ready(function (e) {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
 
             spawnGifs(response.data);
         });
@@ -47,6 +46,15 @@ $(document).ready(function (e) {
             $(this).attr("animation-state", "no");
         }
     })
+
+    $("#title-taker-form").submit(function(event) {
+        event.preventDefault();
+        
+        var input = $("#topic-input").val().trim();
+
+        topics.push(input);
+        generateButtons();
+    });
 
     function generateButtons() {
         $buttonStage.empty();
@@ -89,6 +97,7 @@ $(document).ready(function (e) {
         for (let i = 0; i < results.length; i++) {
             var $imageBox = $("<div>");
             var $image = $("<img>");
+            var $rating = $("<p>");
 
             $imageBox.addClass("col-3");
             $image.addClass("gif-image");
@@ -97,6 +106,8 @@ $(document).ready(function (e) {
             $image.attr("still-url", results[i].images.fixed_height_small_still.url);
             $image.attr("animation-state", "no");
             $image.attr("src", results[i].images.fixed_height_small_still.url);
+            $rating.text(results[i].rating.toUpperCase());
+            $rating.addClass("bg-primary text-white font-weight-bold text-center");
 
             if (colCount < colMax) {
                 colCount++;
@@ -113,8 +124,7 @@ $(document).ready(function (e) {
             $gifsStage.append($currRow);
             $currRow.prepend($imageBox);
             $imageBox.append($image);
-
-            console.log($currRow);
+            $imageBox.append($rating);
         }
     }
 });
